@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/dumbbell.svg" alt="Gymrat Logo" width="80" height="80">
+  
+  # Gymrat SaaS 🚀
+  
+  **The ultimate Multi-Tenant Gym Management Platform powered by Google Gemini AI.**  
+  *La plataforma definitiva Multi-Tenant para administración de gimnasios impulsada por IA.*
 
-## Getting Started
+  [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat&logo=next.js)](https://nextjs.org/)
+  [![Firebase](https://img.shields.io/badge/Firebase-AI_Logic-FFCA28?style=flat&logo=firebase)](https://firebase.google.com/)
+  [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
+  [![Shadcn UI](https://img.shields.io/badge/UI-Shadcn-black?style=flat)](https://ui.shadcn.com/)
 
-First, run the development server:
+  [English](#english) • [Español](#español)
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## English <a name="english"></a>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Gymrat** is a modern, responsive, mobile-first SaaS designed to manage from a single gym to thousands. It provides dedicated interfaces for Super Admins, Gym Owners, Trainers, and Clients.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### ✨ Key Features
+- 🏢 **Multi-Tenant Architecture:** Every gym gets its own isolated environment, branding, and color scheme.
+- 🤖 **Gemini AI Integration:** Generates hyper-personalized workout routines on the fly using `firebase/ai` (Gemini 2.5 Flash Lite) directly from the client edge!
+- 🗄️ **Smart Global Caching:** AI-generated exercises are stored globally in Firestore, reducing API latency and saving AI quota.
+- 🛡️ **Role-Based Routing:** Next.js Route Groups perfectly separate authentication and navigation for `admin`, `trainer`, and `client`.
+- 📊 **Interactive Tracking:** Clients can log their weights and see dynamic charts powered by Recharts.
 
-## Learn More
+### 🛠️ Tech Stack
+- **Frontend:** Next.js 15 (App Router), React, Tailwind CSS, Shadcn UI, Recharts.
+- **Backend:** Firebase Authentication, Firestore (Native Mode), Firebase AI Logic.
+- **Security:** Firebase App Check configured for edge-AI requests.
 
-To learn more about Next.js, take a look at the following resources:
+### 🚀 Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/GerAjeno/Gymrat.git
+   cd Gymrat
+   ```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+3. **Setup Firebase Config**
+   Create a `.env.local` file in the root with your Firebase credentials.
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Español <a name="español"></a>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Gymrat** es un SaaS moderno, responsive y "mobile-first" diseñado para administrar desde un solo gimnasio hasta miles. Proporciona interfaces dedicadas para Súper Administradores, Dueños de Gimnasios, Entrenadores y Clientes.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ✨ Características Principales
+- 🏢 **Arquitectura Multi-Tenant:** Cada gimnasio obtiene su propio entorno aislado, marca y paleta de colores.
+- 🤖 **Integración de IA Gemini:** ¡Genera rutinas de entrenamiento hiper-personalizadas al instante utilizando `firebase/ai` (Gemini 2.5 Flash Lite) directamente desde el frontend!
+- 🗄️ **Caché Global Inteligente:** Los ejercicios generados por IA se almacenan globalmente en Firestore, lo que reduce el tiempo de espera de la API y ahorra cuota de uso.
+- 🛡️ **Enrutamiento por Roles:** Los Grupos de Rutas de Next.js separan perfectamente la autenticación y la navegación para `admin`, `entrenador` y `cliente`.
+- 📊 **Seguimiento Interactivo:** Los clientes pueden registrar sus pesos y ver gráficos dinámicos impulsados por Recharts.
+
+### 🛠️ Tecnologías
+- **Frontend:** Next.js 15 (App Router), React, Tailwind CSS, Shadcn UI, Recharts.
+- **Backend:** Firebase Authentication, Firestore (Modo Nativo), Firebase AI Logic.
+- **Seguridad:** Firebase App Check configurado para proteger las peticiones de Inteligencia Artificial desde el navegador.
+
+### 🚀 Empezando
+
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/GerAjeno/Gymrat.git
+   cd Gymrat
+   ```
+2. **Instalar dependencias**
+   ```bash
+   npm install
+   ```
+3. **Configurar Firebase**
+   Crea un archivo `.env.local` en la raíz con tus credenciales de Firebase.
+4. **Ejecutar el servidor de desarrollo**
+   ```bash
+   npm run dev
+   ```
+
+<div align="center">
+  <br />
+  <p><i>Developed with ❤️ for the fitness community.</i></p>
+</div>
