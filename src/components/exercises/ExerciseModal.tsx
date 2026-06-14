@@ -28,47 +28,54 @@ export function ExerciseModal({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!exerciseName || !isOpen) return;
+    if (!isOpen || !exerciseName) return;
 
-    const fetchOrGenerateDetails = async () => {
+    const fetchExercise = async () => {
       setLoading(true);
-      setDetails(null);
       
-      const safeId = exerciseName.toLowerCase().replace(/[^a-z0-9]/g, "-");
-      const docRef = doc(db, "exercises", safeId);
+      // Formatear el nombre para que funcione como un ID de documento único
+      // ej: "Press de Banca Inclinado" -> "press-de-banca-inclinado"
+      const docId = exerciseName.toLowerCase().replace(/[^a-z0-9]/g, "-");
+      const docRef = doc(db, "exercises", docId);
       
       try {
+        // PASO 1: CACHÉ GLOBAL
+        // Intentar leer de Firestore para ahorrar llamadas a la IA y acelerar la carga
         const docSnap = await getDoc(docRef);
+        
         if (docSnap.exists()) {
-          // Use cached data
+          // Si el ejercicio ya está en la base de datos, lo mostramos inmediatamente (Ahorro de API!)
           setDetails(docSnap.data() as ExerciseDetail);
         } else {
-          // Generate with AI and save to Firestore
+          // PASO 2: GENERACIÓN CON IA (GEMINI)
+          // Si es un ejercicio nuevo, se lo pedimos a Gemini Flash Lite
           const prompt = `Proporciona las instrucciones y los músculos involucrados para el ejercicio: "${exerciseName}".`;
           const result = await exerciseDetailModel.generateContent(prompt);
           const aiData = JSON.parse(await result.response.text());
           
           const newExercise: ExerciseDetail = {
-            id: safeId,
+            id: docId,
             name: exerciseName,
             description: aiData.description,
             muscles: aiData.muscles,
-            // Placeholder since user doesn't have Blaze plan for Gemini Image Generation
             imageUrl: "" 
           };
           
+          // PASO 3: GUARDAR EN LA BASE DE DATOS
+          // Guardamos el resultado en Firestore para que el próximo usuario que pida
+          // este ejercicio lo obtenga de la caché instantáneamente sin usar IA.
           await setDoc(docRef, newExercise);
           setDetails(newExercise);
         }
-      } catch (e) {
-        console.error("Error fetching exercise details:", e);
+      } catch (err) {
+        console.error("Error fetching/generating exercise:", err);
       } finally {
-        setLoading(false);
+        setLoading(false); // Detenemos el spinner de carga
       }
     };
 
-    fetchOrGenerateDetails();
-  }, [exerciseName, isOpen]);
+    fetchExercise();
+  }, [isOpen, exerciseName]);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
